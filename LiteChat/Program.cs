@@ -2,6 +2,8 @@
 using SadRogue.Primitives;
 using System;
 using Console = SadConsole.Console;
+using LiteChat.Core.Console;
+using LiteChat.Configuration;
 
 namespace LiteChat
 {
