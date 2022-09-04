@@ -68,16 +68,9 @@ namespace LiteChat.Core.Console
         {
             LayoutConsole child = new LayoutConsole(width, height, foreground, background, glyph, title);
 
-            if(child.Width > Width - 1)
-            {
-                child.Resize(Width - 2, child.Height, true);
-            }
-            if(child.Height > Height - 1)
-            {
-                child.Resize(child.Width, Height - 2, true);
-            }
-
             child.Position = GetFirstAvailablePosition();
+            ResizeChild(child);
+
             Children.Add(child);
        
             return child;
@@ -170,6 +163,32 @@ namespace LiteChat.Core.Console
         {
             rConsoleRectangle = new Rectangle(0, 0, width, height);
             this.DrawBox(rConsoleRectangle, ShapeParameters.CreateFilled(new ColoredGlyph(DefaultForeground, DefaultBackground, gBorderGlyph), new ColoredGlyph(DefaultForeground, DefaultBackground)));
+        }
+
+        void ResizeChild(LayoutConsole child)
+        {
+            if (child.Width > Width - 1)
+            {
+                child.Resize(Width - 2, child.Height, true);
+
+            }
+            if (child.Height > Height - 1)
+            {
+                child.Resize(child.Width, Height - 2, true);
+            }
+
+            if (child.Width + child.Position.X > Width - 1)
+            {
+                child.Resize((Width - 1) - child.Position.X , child.Height, true);
+            }
+
+            if (child.Height + child.Position.Y > Height - 1)
+            {
+                child.Resize(child.Width, (Height - 1) - child.Position.Y , true);
+            }
+
+            child.GenerateBox(child.Width, child.Height);
+            child.SetConsoleTitle(child.ConsoleTitle);
         }
 
         /// <summary>
