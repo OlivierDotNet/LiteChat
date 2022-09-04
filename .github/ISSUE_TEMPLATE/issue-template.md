@@ -1,9 +1,9 @@
 ---
 name: Issue Template
-about: Describe this issue template's purpose here.
+about: Issue template
 title: ''
 labels: ''
-assignees: ''
+assignees: OlivierDotNet
 
 ---
 
