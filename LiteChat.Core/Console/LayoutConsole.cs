@@ -59,6 +59,16 @@ namespace LiteChat.Core.Console
         public LayoutConsole AddChildConsole(int width, int height, Color foreground, Color background, int glyph, string title = "")
         {
             LayoutConsole child = new LayoutConsole(width, height, foreground, background, glyph, title);
+
+            if(child.Width > Width - 1)
+            {
+                child.Resize(Width - 2, child.Height, true);
+            }
+            if(child.Height > Height - 1)
+            {
+                child.Resize(child.Width, Height - 2, true);
+            }
+
             child.Position = GetFirstAvailablePosition();
             Children.Add(child);
        
