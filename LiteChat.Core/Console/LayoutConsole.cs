@@ -183,6 +183,7 @@ namespace LiteChat.Core.Console
                 this.Print(i, 0, $"", new ColoredGlyph(DefaultForeground, DefaultBackground, gBorderGlyph));
             }
 
+            szConsoleTitle = title;
             this.Print(2, 0, $"{title}"); // 2, 0 is the offset used for every LayoutConsole's title. 
         }
 
