@@ -46,11 +46,13 @@ namespace LiteChat.Core.Console
 
         #region Methods
 
-        protected override void OnIsDirtyChanged()
-        {
-            GenerateBox(Width, Height);
-            SetConsoleTitle(szConsoleTitle);
-        }
+        //protected override void OnIsDirtyChanged()
+        //{
+            
+        //    GenerateBox(Width, Height);
+        //    SetConsoleTitle(szConsoleTitle);
+        //    base.OnIsDirtyChanged();
+        //}
 
         /// <summary>
         /// Creates a <see cref="LayoutConsole"/> child (<see cref="ScreenObject.Children"/>) and positions it as a block element in html
