@@ -13,7 +13,7 @@ namespace LiteChat
         *   0.##    = release
         */
 
-        const string VERSION = "0.01b";
+        const string VERSION = "0.05b";
 
         const int SCREEN_WIDTH = 120;
         const int SCREEN_HEIGHT = 30;
