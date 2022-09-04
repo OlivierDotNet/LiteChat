@@ -25,6 +25,7 @@ namespace LiteChat
 
             Settings.WindowTitle = $"LiteChat - {VERSION}";
             Settings.UseDefaultExtendedFont = true;
+            Settings.ResizeMode = Settings.WindowResizeOptions.Scale;
 
             Game.Create(SCREEN_WIDTH, SCREEN_HEIGHT);
 
