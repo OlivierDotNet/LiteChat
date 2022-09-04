@@ -116,20 +116,17 @@ namespace LiteChat.Core.Console
         /// Prints <paramref name="text"/> at the cursor position
         /// </summary>
         /// <param name="text">Text to print</param>
-        /// <param name="newLine">Whether to make a new line</param>
-        public void Print(string text, bool newLine = true)
+        public void Print(string text)
         {
             Cursor.Position = GetFirstAvailablePosition();
             Cursor.Print(text);
-            if(newLine) Cursor.NewLine();
         }
 
-        /// <inheritdoc cref="Print(string, bool)"/>
-        public void Print(ColoredString text, bool newLine = true)
+        /// <inheritdoc cref="Print(string)"/>
+        public void Print(ColoredString text)
         {
             Cursor.Position = GetFirstAvailablePosition();
             Cursor.Print(text);
-            if (newLine) Cursor.NewLine();
         }
 
 
