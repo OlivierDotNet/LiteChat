@@ -7,7 +7,8 @@ namespace LiteChat
 {
     internal class Program
     {
-       /*   Version definition:
+       /*   
+        *   Version definition:
         *   b       = beta
         *   #.00    = main release
         *   0.##    = release
