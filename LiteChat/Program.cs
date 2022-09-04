@@ -18,6 +18,8 @@ namespace LiteChat
         const int SCREEN_WIDTH = 120;
         const int SCREEN_HEIGHT = 30;
 
+        static readonly ScreenObject MAIN_CONTAINER = new ScreenObject();
+
         private static void Main(string[] args)
         {
 
@@ -33,8 +35,7 @@ namespace LiteChat
 
         private static void Init()
         {
-            ScreenObject mainContainer = new ScreenObject();
-            Game.Instance.Screen = mainContainer;
+            Game.Instance.Screen = MAIN_CONTAINER;
             Game.Instance.DestroyDefaultStartingConsole();
         }
     }
