@@ -46,8 +46,29 @@ namespace LiteChat.Core.Console
 
         #region Methods
 
+        /// <summary>
+        /// Creates a <see cref="LayoutConsole"/> child (<see cref="ScreenObject.Children"/>) and positions it as a block element in html
+        /// </summary>
+        /// <param name="width">width of the new <see cref="LayoutConsole"/></param>
+        /// <param name="height">height of the new <see cref="LayoutConsole"/></param>
+        /// <param name="foreground">Text &amp; Border color of the new <see cref="LayoutConsole"/></param>
+        /// <param name="background">Background color for the new <see cref="LayoutConsole"/></param>
+        /// <param name="glyph">The border glyph to be used in the new <see cref="LayoutConsole"/></param>
+        /// <param name="title">Whether to show a title for the new <see cref="LayoutConsole"/></param>
+        /// <returns>The created <see cref="LayoutConsole"/></returns>
+        public LayoutConsole AddChildConsole(int width, int height, Color foreground, Color background, int glyph, string title = "")
+        {
+            LayoutConsole child = new LayoutConsole(width, height, foreground, background, glyph, title);
+            child.Position = GetFirstAvailablePosition();
+            Children.Add(child);
+       
+            return child;
+        }
 
-
+        /// <summary>
+        /// Retrieves the position right below the most recent element, including borders.
+        /// </summary>
+        /// <returns>The offset from the starting position of the <see cref="LayoutConsole"/> to where the last element and written text is</returns>
         public Point GetFirstAvailablePosition()
         {
             // Default position is (1, 1) as it's within the border box.
