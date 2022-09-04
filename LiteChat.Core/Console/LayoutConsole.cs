@@ -46,6 +46,34 @@ namespace LiteChat.Core.Console
 
         #region Methods
 
+
+
+        public Point GetFirstAvailablePosition()
+        {
+            // Default position is (1, 1) as it's within the border box.
+            Point offset = new Point(1, 1);
+            if (Children.Count > 0)
+            {
+                foreach (ScreenSurface screen in Children)
+                {
+                    // Increase offset for each element
+                    offset += new Point(0, screen.Surface.Height);
+                }
+
+                // Also increase offset from the Cursor's last printed text position
+                return offset += new Point(0, Cursor.Position.Y);
+            }
+            else if (Cursor.Position.Y > 1) // If the cursor has printed multiple rows
+            {
+                return offset + new Point(0, Cursor.Position.Y);
+            }
+            else // return base offset
+            {
+                return offset;
+            }
+        }
+
+
         /// <summary>
         /// Initializes the <see cref="LayoutConsole"/> with values specified for space, border and colors
         /// </summary>
@@ -63,7 +91,7 @@ namespace LiteChat.Core.Console
             ConsoleTitle = title;
 
             // Offset the cursor so it's within the box bounds
-            Cursor.Move(1, 1);
+            Cursor.Move(GetFirstAvailablePosition());
         }
 
         /// <summary>
