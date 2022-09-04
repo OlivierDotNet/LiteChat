@@ -11,9 +11,9 @@ namespace LiteChat.Core.Console
         #region Fields
         protected Rectangle rConsoleRectangle = new Rectangle();
         protected int gBorderGlyph = 0;
-        protected string szWindowTitle = string.Empty;
+        protected string szConsoleTitle = string.Empty;
 
-        public string WindowTitle { get { return szWindowTitle; } set { SetWindowTitle(value); } }
+        public string ConsoleTitle { get { return szConsoleTitle; } set { SetConsoleTitle(value); } }
 
         #endregion
 
@@ -60,7 +60,7 @@ namespace LiteChat.Core.Console
             gBorderGlyph = glyph;
             SetDefaultColors(foreground, background);
             GenerateBox(width, height);
-            WindowTitle = title;
+            ConsoleTitle = title;
 
             // Offset the cursor so it's within the box bounds
             Cursor.Move(1, 1);
@@ -89,11 +89,11 @@ namespace LiteChat.Core.Console
         }
 
         /// <summary>
-        /// Sets the Window Title, overwriting the previous one and replacing empty space with the border
+        /// Sets the Console Title, overwriting the previous one and replacing empty space with the border
         /// </summary>
         /// <param name="title">new title to be set</param>
         /// <param name="upperCase">whether to uppercase the title</param>
-        void SetWindowTitle(string title, bool upperCase = false)
+        void SetConsoleTitle(string title, bool upperCase = false)
         {
             if (String.IsNullOrEmpty(title)) return;
             if (upperCase) title = title.ToUpper();
