@@ -12,8 +12,10 @@ namespace LiteChat.Core.Console
         protected Rectangle rConsoleRectangle = new Rectangle();
         protected int gBorderGlyph = 0;
         protected string szConsoleTitle = string.Empty;
+        protected SadConsole.Console cPrintConsole;
 
         public string ConsoleTitle { get { return szConsoleTitle; } set { SetConsoleTitle(value); } }
+        public new SadConsole.Components.Cursor PrintCursor { get { return cPrintConsole.Cursor;} }
 
         #endregion
 
@@ -80,24 +82,30 @@ namespace LiteChat.Core.Console
         /// Retrieves the position right below the most recent element, including borders.
         /// </summary>
         /// <returns>The offset from the starting position of the <see cref="LayoutConsole"/> to where the last element and written text is</returns>
-        public Point GetFirstAvailablePosition()
+        public Point GetFirstAvailablePosition(bool ignoreX = true)
         {
             // Default position is (1, 1) as it's within the border box.
-            Point offset = new Point(1, 1);
+            Point offset = new Point(0, 1);
+            if(ignoreX == false)
+            {
+                offset = new Point(1, offset.Y);
+            }
+
             if (Children.Count > 0)
             {
                 foreach (ScreenSurface screen in Children)
                 {
+                    if (screen == cPrintConsole) continue;
                     // Increase offset for each element
-                    offset += new Point(0, screen.Surface.Height);
+                    offset = new Point(offset.X, offset.Y + screen.Surface.Height);
                 }
 
                 // Also increase offset from the Cursor's last printed text position
-                return offset += new Point(0, Cursor.Position.Y);
+                return new Point(offset.X, offset.Y + PrintCursor.Position.Y);
             }
-            else if (Cursor.Position.Y > 1) // If the cursor has printed multiple rows
+            else if (PrintCursor.Position.Y > 1) // If the cursor has printed multiple rows
             {
-                return offset + new Point(0, Cursor.Position.Y);
+                return new Point(offset.X, offset.Y + PrintCursor.Position.Y);
             }
             else // return base offset
             {
@@ -111,15 +119,15 @@ namespace LiteChat.Core.Console
         /// <param name="text">Text to print</param>
         public void Print(string text)
         {
-            Cursor.Position = GetFirstAvailablePosition();
-            Cursor.Print(text);
+            PrintCursor.Position = GetFirstAvailablePosition(true);
+            PrintCursor.Print(text);
         }
 
         /// <inheritdoc cref="Print(string)"/>
         public void Print(ColoredString text)
         {
-            Cursor.Position = GetFirstAvailablePosition();
-            Cursor.Print(text);
+            PrintCursor.Position = GetFirstAvailablePosition(true);
+            PrintCursor.Print(text);
         }
 
 
@@ -137,10 +145,17 @@ namespace LiteChat.Core.Console
             gBorderGlyph = glyph;
             SetDefaultColors(foreground, background);
             GenerateBox(width, height);
+            InitCursor(width, height);
             ConsoleTitle = title;
+        }
 
+        void InitCursor(int width, int height)
+        {
+            cPrintConsole = new SadConsole.Console(width - 2, height);
+            cPrintConsole.Position = new Point(1, 0);
             // Offset the cursor so it's within the box bounds
-            Cursor.Move(GetFirstAvailablePosition());
+
+            Children.Add(cPrintConsole);
         }
 
         /// <summary>
