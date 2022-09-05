@@ -152,11 +152,16 @@ namespace LiteChat.Core.Console
             gBorderGlyph = glyph;
             SetDefaultColors(foreground, background);
             GenerateBox(width, height);
-            InitCursor(width, height);
+            InitPrintConsole(width, height);
             ConsoleTitle = title;
         }
 
-        void InitCursor(int width, int height)
+        /// <summary>
+        /// Initializes the <see cref="cPrintConsole"/> that's used mainly for printing within the respective bounds of the <see cref="LayoutConsole"/>
+        /// </summary>
+        /// <param name="width">Width of this <see cref="LayoutConsole"/></param>
+        /// <param name="height">Height of this <see cref="LayoutConsole"/></param>
+        void InitPrintConsole(int width, int height)
         {
             cPrintConsole = new SadConsole.Console(width - 2, height);
             cPrintConsole.Position = new Point(INNER_OFFSET.X, 0);
@@ -187,6 +192,10 @@ namespace LiteChat.Core.Console
             this.DrawBox(rConsoleRectangle, ShapeParameters.CreateFilled(new ColoredGlyph(DefaultForeground, DefaultBackground, gBorderGlyph), new ColoredGlyph(DefaultForeground, DefaultBackground)));
         }
 
+        /// <summary>
+        /// Properly resizes the <paramref name="child"/> to match the parent's (this <see cref="LayoutConsole"/>) bounds
+        /// </summary>
+        /// <param name="child">The newly created <see cref="LayoutConsole"/></param>
         void ResizeChild(LayoutConsole child)
         {
             if (child.Width > Width - 1)
