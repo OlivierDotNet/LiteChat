@@ -82,7 +82,7 @@ namespace LiteChat.Core.Console
         /// Retrieves the position right below the most recent element, including borders.
         /// </summary>
         /// <returns>The offset from the starting position of the <see cref="LayoutConsole"/> to where the last element and written text is</returns>
-        public Point GetFirstAvailablePosition(bool ignoreX = true)
+        public Point GetFirstAvailablePosition(bool ignoreX = false)
         {
             // Default position is (1, 1) as it's within the border box.
             Point offset = new Point(0, 1);
