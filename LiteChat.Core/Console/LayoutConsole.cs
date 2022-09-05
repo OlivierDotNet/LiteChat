@@ -8,6 +8,13 @@ namespace LiteChat.Core.Console
     /// </summary>
     public class LayoutConsole : SadConsole.Console
     {
+        #region Constants
+
+        static readonly Point INNER_OFFSET = new Point(1, 1);
+        static readonly Point TITLE_OFFSET = new Point(2, 0);
+
+        #endregion
+
         #region Fields
         protected Rectangle rConsoleRectangle = new Rectangle();
         protected int gBorderGlyph = 0;
