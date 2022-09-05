@@ -92,10 +92,10 @@ namespace LiteChat.Core.Console
         public Point GetFirstAvailablePosition(bool ignoreX = false)
         {
             // Default position is (1, 1) as it's within the border box.
-            Point offset = new Point(0, 1);
+            Point offset = new Point(0, INNER_OFFSET.Y);
             if(ignoreX == false)
             {
-                offset = new Point(1, offset.Y);
+                offset = new Point(INNER_OFFSET.X, offset.Y);
             }
 
             if (Children.Count > 0)
@@ -159,8 +159,8 @@ namespace LiteChat.Core.Console
         void InitCursor(int width, int height)
         {
             cPrintConsole = new SadConsole.Console(width - 2, height);
-            cPrintConsole.Position = new Point(1, 0);
-            // Offset the cursor so it's within the box bounds
+            cPrintConsole.Position = new Point(INNER_OFFSET.X, 0);
+            // Position the print console directly at the start of the LayoutConsole
 
             Children.Add(cPrintConsole);
         }
@@ -230,7 +230,7 @@ namespace LiteChat.Core.Console
             }
 
             szConsoleTitle = title;
-            this.Print(2, 0, $"{title}"); // 2, 0 is the offset used for every LayoutConsole's title. 
+            this.Print(TITLE_OFFSET.X, TITLE_OFFSET.Y, $"{title}"); // Apply the offset used for every LayoutConsole's title. 
         }
 
         #endregion
