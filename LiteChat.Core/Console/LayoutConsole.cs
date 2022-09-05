@@ -1,5 +1,6 @@
 ﻿using SadConsole;
 using SadRogue.Primitives;
+using LiteChat.Core.Utils;
 
 namespace LiteChat.Core.Console
 {
@@ -27,27 +28,27 @@ namespace LiteChat.Core.Console
         #endregion
 
         #region Constructors
-        public LayoutConsole(int width, int height, Color foreground, Color background, int glyph, string title = "") : base(width, height)
+        public LayoutConsole(int width, int height, Color foreground, Color background, Glyph glyph, string title = "") : base(width, height)
         {
             Initialize(width, height, foreground, background, glyph, title);
         }
 
-        public LayoutConsole(int width, int height, Color foreground, Color background, int glyph, ColoredGlyph[] initialCells, string title = "") : base(width, height, initialCells)
+        public LayoutConsole(int width, int height, Color foreground, Color background, Glyph glyph, ColoredGlyph[] initialCells, string title = "") : base(width, height, initialCells)
         {
             Initialize(width, height, foreground, background, glyph, title);
         }
 
-        public LayoutConsole(ICellSurface surface, Color foreground, Color background, int glyph, string title = "", IFont font = null, Point? fontSize = null) : base(surface, font, fontSize)
+        public LayoutConsole(ICellSurface surface, Color foreground, Color background, Glyph glyph, string title = "", IFont font = null, Point? fontSize = null) : base(surface, font, fontSize)
         {
             Initialize(surface.Width, surface.Height, foreground, background, glyph, title);
         }
 
-        public LayoutConsole(int width, int height, Color foreground, Color background, int glyph, int bufferWidth, int bufferHeight, string title = "") : base(width, height, bufferWidth, bufferHeight)
+        public LayoutConsole(int width, int height, Color foreground, Color background, Glyph glyph, int bufferWidth, int bufferHeight, string title = "") : base(width, height, bufferWidth, bufferHeight)
         {
             Initialize(width, height, foreground, background, glyph, title);
         }
 
-        public LayoutConsole(int width, int height, Color foreground, Color background, int glyph, int bufferWidth, int bufferHeight, ColoredGlyph[] initialCells, string title = "") : base(width, height, bufferWidth, bufferHeight, initialCells)
+        public LayoutConsole(int width, int height, Color foreground, Color background, Glyph glyph, int bufferWidth, int bufferHeight, ColoredGlyph[] initialCells, string title = "") : base(width, height, bufferWidth, bufferHeight, initialCells)
         {
             Initialize(width, height, foreground, background, glyph, title);
         }
@@ -73,7 +74,7 @@ namespace LiteChat.Core.Console
         /// <param name="glyph">The border glyph to be used in the new <see cref="LayoutConsole"/></param>
         /// <param name="title">Whether to show a title for the new <see cref="LayoutConsole"/></param>
         /// <returns>The created <see cref="LayoutConsole"/></returns>
-        public LayoutConsole AddChildConsole(int width, int height, Color foreground, Color background, int glyph, string title = "")
+        public LayoutConsole AddChildConsole(int width, int height, Color foreground, Color background, Glyph glyph, string title = "")
         {
             LayoutConsole child = new LayoutConsole(width, height, foreground, background, glyph, title);
 
