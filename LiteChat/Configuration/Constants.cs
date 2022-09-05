@@ -1,4 +1,5 @@
-﻿using SadConsole;
+﻿using LiteChat.Core.Utils;
+using SadConsole;
 using SadRogue.Primitives;
 
 namespace LiteChat.Configuration
@@ -14,8 +15,8 @@ namespace LiteChat.Configuration
 
         #region Borders
 
-        public static readonly int BorderGlyphFilled    = 219;
-        public static readonly int BorderGlyphShallow   = 177;
+        public static readonly Glyph BorderGlyphFilled    = 219;
+        public static readonly Glyph BorderGlyphShallow   = 177;
 
         #endregion
     }
