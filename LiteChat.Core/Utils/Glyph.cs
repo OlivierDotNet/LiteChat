@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace LiteChat.Core.Utils
 {
+    /// <summary>
+    /// Typed glyph, can be used interchangeably with an <see cref="int"/>
+    /// </summary>
     public struct Glyph
     {
         int glyphValue;
