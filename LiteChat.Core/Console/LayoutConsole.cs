@@ -15,7 +15,7 @@ namespace LiteChat.Core.Console
         protected SadConsole.Console cPrintConsole;
 
         public string ConsoleTitle { get { return szConsoleTitle; } set { SetConsoleTitle(value); } }
-        public new SadConsole.Components.Cursor PrintCursor { get { return cPrintConsole.Cursor;} }
+        public SadConsole.Components.Cursor PrintCursor { get { return cPrintConsole.Cursor;} }
 
         #endregion
 
