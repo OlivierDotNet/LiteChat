@@ -10,7 +10,7 @@ namespace LiteChat.Core.Helpers
     {
         /// <summary>
         /// 
-        /// Creates a layout on the current row based on the <paramref name="maxWidth"/> of the application aswell as the <paramref name="spaceInPct"/> provided for each <see cref="SadConsole.ScreenObject"/>. Should be used by percentage, meaning two consoles with a split view would be 50, 50. Maximum value should be 100
+        /// Creates a horizontal layout on the current row based on the <paramref name="maxWidth"/> of the application aswell as the <paramref name="spaceInPct"/> provided for each <see cref="SadConsole.ScreenObject"/>. Should be used by percentage, meaning two consoles with a split view would be 50, 50. Maximum value should be 100
         /// </summary>
         /// <param name="maxWidth">The maximum width of this layout</param>
         /// <param name="spaceInPct">How much space in % the <see cref="SadConsole.ScreenObject"/> should use</param>
