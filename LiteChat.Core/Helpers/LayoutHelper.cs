@@ -16,7 +16,7 @@ namespace LiteChat.Core.Helpers
         /// <param name="spaceInPct">How much space in % the <see cref="SadConsole.ScreenObject"/> should use</param>
         /// <returns>An array of ints containing the width of each <see cref="SadConsole.ScreenObject"/> to be used, sorted by order of arguements</returns>
         /// <exception cref="Exception"></exception>
-        public static int[] CreateLayout(int maxWidth, params int[] spaceInPct)
+        public static int[] CreateHorizontalLayout(int maxWidth, params int[] spaceInPct)
         {
             if(spaceInPct.Length == 0 || spaceInPct.Length < 1)
             {
@@ -24,38 +24,36 @@ namespace LiteChat.Core.Helpers
             }
 
             int[] layout = new int[spaceInPct.Length];
-            int widthUsed = maxWidth;
+            int widthUsed = 0;
 
             for (int i = 0; i < spaceInPct.Length; i++)
             {
-                if (spaceInPct[i] >= 100)
+
+                if (widthUsed == maxWidth)
                 {
-                    throw new Exception("Maximum layout % is 100");
+                    return layout;
                 }
 
-                if (widthUsed <= 0)
-                {
-                    if (spaceInPct[i] == spaceInPct.Last())
-                    {
-                        layout[i] = maxWidth - widthUsed;
-                    }
-                }
-
-                int dividedValue = spaceInPct[i] / 10;
-
-                if (spaceInPct[i] > 50)
-                {
-                    layout[i] = (maxWidth / 2) + (maxWidth / dividedValue);
-                }
-                else if (spaceInPct[i] == 50)
-                {
-                    layout[i] = (maxWidth / 2);
-                }
-                else
-                {
-                    layout[i] = (maxWidth / dividedValue);
-                }
-                widthUsed -= layout[i];
+                float dividedValue = (float)spaceInPct[i] / 100f;
+               
+                layout[i] = (int)MathF.Round(maxWidth * dividedValue);
+                widthUsed += layout[i];
+                
+                //if (spaceInPct[i] == spaceInPct.Last())
+                //{
+                //    layout[i] = maxWidth - widthUsed;
+                //}
+                //if (spaceInPct[i] > 50)
+                //{
+                //}
+                //else if (spaceInPct[i] == 50)
+                //{
+                //    layout[i] = (maxWidth * 2);
+                //}
+                //else
+                //{
+                //    layout[i] = (maxWidth / dividedValue);
+                //}
             }
 
             return layout;
